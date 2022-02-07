@@ -15,16 +15,16 @@ function getPixelIndex(x, y) {
   return (x + y * width) * 4
 }
 
-function getZoomedX(x) {
+function getCartesianX(x) {
   return (x - HALF_WIDTH + xOffset) / ZOOM
 }
 
-function getZoomedY(y) {
+function getCartesianY(y) {
   return (y - HALF_HEIGHT + yOffset) / ZOOM
 }
 
 function getCartesian(x, y) {
-  return [getZoomedX(x), getZoomedY(y)]
+  return [getCartesianX(x), getCartesianY(y)]
 }
 
 function calculateColor(iterations) {
