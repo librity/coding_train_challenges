@@ -28,8 +28,8 @@ function getCartesian(x, y) {
 }
 
 function calculateBrightness(iterations) {
-  const normalized = map(iterations, 0, MANDLEBROT_DEPTH, 0, 1)
-  const brightness = map(Math.sqrt(normalized), 0, 1, 0, 255)
+  const normalizedIterations = map(iterations, 0, MANDLEBROT_DEPTH, 0, 1)
+  const brightness = map(Math.sqrt(normalizedIterations), 0, 1, 0, 255)
 
   return brightness
 }
