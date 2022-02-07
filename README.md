@@ -7,6 +7,7 @@ Coding Train - All coding challenges!
 ### Javascript `Math`
 
 - https://www.w3schools.com/jsref/jsref_sqrt.asp
+- https://www.w3schools.com/jsref/jsref_max_value.asp
 
 ### Math
 

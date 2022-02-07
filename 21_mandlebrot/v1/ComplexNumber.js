@@ -1,5 +1,7 @@
 const MANDLEBROT_DEPTH = 100
+
 const MANDLEBROT_INFINITY = 16
+// const MANDLEBROT_INFINITY = Number.MAX_VALUE
 
 class ComplexNumber {
   real
@@ -11,6 +13,9 @@ class ComplexNumber {
   }
 
   magnitude() {
+    // z = x + yI
+    // |z| = sqrt(x * x + y * y)
+
     const magnitude = Math.sqrt(
       this.real * this.real + this.imaginary * this.imaginary,
     )
@@ -25,6 +30,9 @@ class ComplexNumber {
   }
 
   conjugate() {
+    // z = x + yI
+    // ẑ = x - yI
+
     const newReal = this.real
     const newImaginary = -this.imaginary
 
@@ -51,6 +59,10 @@ class ComplexNumber {
   }
 
   plus(addend) {
+    // w = u + vI
+    // z = x + yI
+    // z + w = (x + u) + I * (y + v)
+
     const newReal = this.real + addend.real
     const newImaginary = this.imaginary + addend.imaginary
 
@@ -58,6 +70,10 @@ class ComplexNumber {
   }
 
   minus(subtrahend) {
+    // w = u + vI
+    // z = x + yI
+    // z - w = (x - u) + I * (y - v)
+
     const newReal = this.real - subtrahend.real
     const newImaginary = this.imaginary - subtrahend.imaginary
 
@@ -65,7 +81,10 @@ class ComplexNumber {
   }
 
   times(multiplicand) {
-    // (x + Iy) * (u + Iv) = (xu - yv) + I * (xv + yu)
+    // w = u + vI
+    // z = x + yI
+    // z * w = (x + Iy) * (u + Iv) = (xu - yv) + I * (xv + yu)
+
     const newReal =
       this.real * multiplicand.real - this.imaginary * multiplicand.imaginary
     const newImaginary =
@@ -77,7 +96,7 @@ class ComplexNumber {
   by(divisor) {
     // w = u + vI
     // z = x + yI
-    // w / z = ( (ux + vy) / (x*x + y*y) ) + I * (vx + uy) / (x*x + y*y)
+    // w / z = ( (ux + vy) / (x*x + y*y) ) + I * (vx - uy) / (x*x + y*y)
 
     const denominator =
       divisor.real * divisor.real + divisor.imaginary * divisor.imaginary
@@ -86,7 +105,7 @@ class ComplexNumber {
       (this.real * divisor.real + this.imaginary * divisor.imaginary) /
       denominator
     const newImaginary =
-      (this.imaginary * divisor.real + this.real * divisor.imaginary) /
+      (this.imaginary * divisor.real - this.real * divisor.imaginary) /
       denominator
 
     return new ComplexNumber(newReal, newImaginary)
