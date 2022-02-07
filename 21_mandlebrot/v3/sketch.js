@@ -1,10 +1,10 @@
 let HALF_WIDTH
 let HALF_HEIGHT
 
+const ZOOM = 300
+
 const xOffset = 0
 const yOffset = 0
-
-const ZOOM = 500
 
 const blueWeight = 0.3
 const redWeight = 0.7
@@ -29,15 +29,12 @@ function getCartesian(x, y) {
 
 function calculateColor(iterations) {
   const normalizedIterations = map(iterations, 0, MANDLEBROT_DEPTH, 0, 1)
-  let brightness = map(Math.sqrt(normalizedIterations), 0, 1, 0, 255 * 3)
+  const hue = map(Math.sqrt(normalizedIterations), 0, 1, 0, 255 * 3)
 
-  const blue = brightness * blueWeight
-  brightness -= 255
-  const red = brightness * redWeight
-  brightness -= 255
-  const green = brightness * greenWeight
+  colorMode(HSB)
+  const hsbColor = color(hue, 255 / 3, 255 / 2)
 
-  return [red, green, blue]
+  return hsbColor.levels
 }
 
 function setPixel(pixelIndex, red, green, blue, alpha) {
@@ -66,9 +63,9 @@ function draw() {
 
       const complexAtXY = new ComplexNumber(xCartesian, yCartesian)
       const [_, iterations] = complexAtXY.checkMandlebrot()
-      const [red, green, blue] = calculateColor(iterations)
+      const [red, green, blue, alpha] = calculateColor(iterations)
 
-      setPixel(pixelIndex, red, green, blue, ALPHA)
+      setPixel(pixelIndex, red, green, blue, alpha)
     }
   }
 
