@@ -131,13 +131,13 @@ class ComplexNumber {
   }
 
   checkJulia(factor) {
-    // F0 = this + factor
+    // F0 = this
     // F1 = F0.squared().plus(factor)
     // F2 = F1.squared().plus(factor)
     // (...)
     // Fn = Fn-1.squared().plus(factor)
 
-    let current = this.plus(factor)
+    let current = this
     let iteration = 0
 
     while (iteration++ < MANDLEBROT_DEPTH) {
